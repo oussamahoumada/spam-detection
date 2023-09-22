@@ -1,0 +1,254 @@
+{
+  "fontStyles": [
+    {
+      "font_style": "normal"
+    },
+    {
+      "font_style": "italic"
+    },
+    {
+      "font_style": "oblique"
+    }
+  ],
+  "fontWeights": [
+    {
+      "font_weight": "normal"
+    },
+    {
+      "font_weight": "bold"
+    },
+    {
+      "font_weight": "100"
+    },
+    {
+      "font_weight": "200"
+    },
+    {
+      "font_weight": "300"
+    },
+    {
+      "font_weight": "500"
+    },
+    {
+      "font_weight": "600"
+    },
+    {
+      "font_weight": "800"
+    },
+    {
+      "font_weight": "900"
+    }
+  ],
+  "fontFamilies": [
+    {
+      "normal_fonts_without_serifs": [
+        "Arial, sans-serif",
+        "Helvetica, sans-serif",
+        "Verdana, sans-serif",
+        "Trebuchet MS, sans-serif",
+        "Gill Sans, sans-serif",
+        "Noto Sans, sans-serif",
+        "Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif",
+        "Optima, sans-serif",
+        "Arial Narrow, sans-serif",
+        "sans-serif"
+      ]
+    },
+    {
+      "normal_fonts_with_serifs": [
+        "Times, Times New Roman, serif",
+        "Didot, serif",
+        "Georgia, serif",
+        "Palatino, URW Palladio L, serif",
+        "Bookman, URW Bookman L, serif",
+        "New Century Schoolbook, TeX Gyre Schola, serif",
+        "American Typewriter, serif",
+        "serif"
+      ]
+    },
+    {
+      "monospace": [
+        "Andale Mono, monospace",
+        "Courier New, monospace",
+        "Courier, monospace",
+        "FreeMono, monospace",
+        "OCR A Std, monospace",
+        "DejaVu Sans Mono, monospace",
+        "monospace"
+      ]
+    },
+    {
+      "cursive": [
+        "Comic Sans MS, Comic Sans, cursive",
+        "Apple Chancery, cursive",
+        "Bradley Hand, cursive",
+        "Brush Script MT, Brush Script Std, cursive",
+        "Snell Roundhand, cursive",
+        "URW Chancery L, cursive",
+        "cursive"
+      ]
+    },
+    {
+      "fantasy": [
+        "Impact, fantasy",
+        "Luminari, fantasy",
+        "Chalkduster, fantasy",
+        "Jazz LET, fantasy",
+        "Blippo, fantasy",
+        "Stencil Std, fantasy",
+        "Marker Felt, fantasy",
+        "Trattatello, fantasy",
+        "fantasy"
+      ]
+    }
+  ],
+  "colors": [
+    "AliceBlue",
+    "AntiqueWhite",
+    "Aqua",
+    "Aquamarine",
+    "Azure",
+    "Beige",
+    "Bisque",
+    "Black",
+    "BlanchedAlmond",
+    "Blue",
+    "BlueViolet",
+    "Brown",
+    "BurlyWood",
+    "CadetBlue",
+    "Chartreuse",
+    "Chocolate",
+    "Coral",
+    "CornflowerBlue",
+    "Cornsilk",
+    "Crimson",
+    "Cyan",
+    "DarkBlue",
+    "DarkCyan",
+    "DarkGoldenrod",
+    "DarkGray",
+    "DarkGreen",
+    "DarkGrey",
+    "DarkKhaki",
+    "DarkMagenta",
+    "DarkOliveGreen",
+    "DarkOrange",
+    "DarkOrchid",
+    "DarkRed",
+    "DarkSalmon",
+    "DarkSeaGreen",
+    "DarkSlateBlue",
+    "DarkSlateGray",
+    "DarkSlateGrey",
+    "DarkTurquoise",
+    "DarkViolet",
+    "DeepPink",
+    "DeepSkyBlue",
+    "DimGray",
+    "DodgerBlue",
+    "FireBrick",
+    "FloralWhite",
+    "ForestGreen",
+    "Fuchsia",
+    "Gainsboro",
+    "GhostWhite",
+    "Gold",
+    "Goldenrod",
+    "Gray",
+    "Green",
+    "GreenYellow",
+    "Grey",
+    "Honeydew",
+    "HotPink",
+    "IndianRed",
+    "Indigo",
+    "Ivory",
+    "Khaki",
+    "Lavender",
+    "LavenderBlush",
+    "LawnGreen",
+    "LemonChiffon",
+    "LightBlue",
+    "LightCoral",
+    "LightCyan",
+    "LightGoldenrodYellow",
+    "LightGray",
+    "LightGreen",
+    "LightGrey",
+    "LightPink",
+    "LightSalmon",
+    "LightSeaGreen",
+    "LightSkyBlue",
+    "LightSlateGray",
+    "LightSlateGrey",
+    "LightSteelBlue",
+    "LightYellow",
+    "Lime",
+    "LimeGreen",
+    "Linen",
+    "Magenta",
+    "Maroon",
+    "MediumAquamarine",
+    "MediumBlue",
+    "MediumOrchid",
+    "MediumPurple",
+    "MediumSeaGreen",
+    "MediumSlateBlue",
+    "MediumSpringGreen",
+    "MediumTurquoise",
+    "MediumVioletRed",
+    "MidnightBlue",
+    "MintCream",
+    "MistyRose",
+    "Moccasin",
+    "NavajoWhite",
+    "Navy",
+    "OldLace",
+    "Olive",
+    "OliveDrab",
+    "Orange",
+    "OrangeRed",
+    "Orchid",
+    "PaleGoldenrod",
+    "PaleGreen",
+    "PaleTurquoise",
+    "PaleVioletRed",
+    "PapayaWhip",
+    "PeachPuff",
+    "Peru",
+    "Pink",
+    "Plum",
+    "PowderBlue",
+    "Purple",
+    "Rebeccapurple",
+    "Red",
+    "RosyBrown",
+    "RoyalBlue",
+    "SaddleBrown",
+    "Salmon",
+    "SandyBrown",
+    "SeaGreen",
+    "Seashell",
+    "Sienna",
+    "Silver",
+    "SkyBlue",
+    "SlateBlue",
+    "SlateGray",
+    "SlateGrey",
+    "Snow",
+    "SpringGreen",
+    "SteelBlue",
+    "Tan",
+    "Teal",
+    "Thistle",
+    "Tomato",
+    "Turquoise",
+    "Violet",
+    "Wheat",
+    "White",
+    "WhiteSmoke",
+    "Yellow",
+    "YellowGreen"
+  ]
+}

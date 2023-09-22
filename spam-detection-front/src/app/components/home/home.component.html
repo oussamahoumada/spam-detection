@@ -1,0 +1,43 @@
+<div [formGroup]="form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput formControlName="mail"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="check()"> submit </button>
+</div>
+
+<mat-form-field>
+  <mat-label>Font Style</mat-label>
+  <mat-select formControlName="font_style">
+    <mat-option [value]="null"></mat-option>
+    <mat-option [value]="fs.font_style" *ngFor="let fs of fontStyles" (onSelectionChange)="setMailStyle()">{{ fs.font_style }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Font Weights</mat-label>
+  <mat-select formControlName="font_weight">
+    <mat-option [value]="null"></mat-option>
+    <mat-option [value]="fw.font_weight" *ngFor="let fw of fontWeights" (onSelectionChange)="setMailStyle()">{{ fw.font_weight }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Colors</mat-label>
+  <mat-select formControlName="color">
+    <mat-option [value]="null"></mat-option>
+    <mat-option [value]="c" *ngFor="let c of colors" (onSelectionChange)="setMailStyle()">{{ c }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Font Family</mat-label>
+  <mat-select formControlName="font_family">
+    <mat-option [value]="null"></mat-option>
+    <mat-optgroup [label]="'normal fonts without serifs'">
+      <mat-option *ngFor="let fontFam of fonFamilies[0].normal_fonts_without_serifs" [value]="fontFam" (onSelectionChange)="setMailStyle()">
+        {{ fontFam }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>
