@@ -1,0 +1,57 @@
+<div [formGroup]="form">
+  <mat-form-field class="fields">
+    <mat-label>Font Style</mat-label>
+    <mat-select formControlName="font_style" id="demo" (onHover)="open()">
+      <mat-option [value]="'normal'" (click)="setMailStyle()"></mat-option>
+      <mat-option [value]="fs.font_style" *ngFor="let fs of fontStyles" (click)="setMailStyle()">{{ fs.font_style }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="fields">
+    <mat-label>Font Weights</mat-label>
+    <mat-select formControlName="font_weight">
+      <mat-option [value]="'normal'" (click)="setMailStyle()"></mat-option>
+      <mat-option [value]="fw.font_weight" *ngFor="let fw of fontWeights" (click)="setMailStyle()">{{ fw.font_weight }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="fields">
+    <mat-label>Colors</mat-label>
+    <mat-select formControlName="color">
+      <mat-option [value]="'black'" (click)="setMailStyle()"></mat-option>
+      <mat-option [value]="c" *ngFor="let c of colors" (click)="setMailStyle()">{{ c }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="fields">
+    <mat-label>Font Family</mat-label>
+    <mat-select formControlName="font_family" >
+      <mat-option [value]="'monospace'" (click)="setMailStyle()"></mat-option>
+      <mat-optgroup class="optgroup" [label]="'normal fonts without serifs'">
+        <mat-option *ngFor="let fontFam of fonFamilies[0].normal_fonts_without_serifs" [value]="fontFam" (click)="setMailStyle()">
+          {{ fontFam }}
+        </mat-option>
+      </mat-optgroup>
+      <mat-optgroup class="optgroup" [label]="'normal fonts with serifs'">
+        <mat-option *ngFor="let fontFam of fonFamilies[1].normal_fonts_with_serifs" [value]="fontFam" (click)="setMailStyle()">
+          {{ fontFam }}
+        </mat-option>
+      </mat-optgroup>
+      <mat-optgroup class="optgroup" [label]="'monospace'">
+        <mat-option *ngFor="let fontFam of fonFamilies[2].monospace" [value]="fontFam" (click)="setMailStyle()">
+          {{ fontFam }}
+        </mat-option>
+      </mat-optgroup>
+      <mat-optgroup class="optgroup" [label]="'cursive'">
+        <mat-option *ngFor="let fontFam of fonFamilies[3].cursive" [value]="fontFam" (click)="setMailStyle()">
+          {{ fontFam }}
+        </mat-option>
+      </mat-optgroup>
+      <mat-optgroup class="optgroup" [label]="'fantasy'">
+        <mat-option *ngFor="let fontFam of fonFamilies[4].fantasy" [value]="fontFam" (click)="setMailStyle()">
+          {{ fontFam }}
+        </mat-option>
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+</div>

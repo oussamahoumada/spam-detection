@@ -19,7 +19,6 @@ def preprocess(text):
         tokens = text.split(" ") #"split demo" == ['split','demo']
         
         #filter out stopwords
-        
         return " ".join(t for t in tokens if t not in ENGLISH_STOP_WORDS)
 
 tfidf = TfidfVectorizer() 
