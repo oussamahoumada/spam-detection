@@ -1,0 +1,37 @@
+<div [formGroup]="form" class="newMailDialog">
+  <h1>New mail</h1>
+  <div>
+    <mat-form-field>
+      <mat-label>Enter an email</mat-label>
+      <input
+        matInput
+        placeholder="mail@mail.com"
+        formControlName="receiver"
+        required
+      />
+      <mat-error *ngIf="form.controls['receiver'].invalid">{{
+        "Invalid mail"
+      }}</mat-error> </mat-form-field
+    ><br />
+    <mat-form-field>
+      <mat-label>Objet</mat-label>
+      <input matInput formControlName="objet" required />
+    </mat-form-field>
+    <mat-menu #menu="matMenu">
+      <app-text-style></app-text-style>
+    </mat-menu>
+    <textarea
+      formControlName="mailContent"
+      id="textarea"
+      rows="20"
+      cols="90"
+    ></textarea>
+  </div>
+
+  <div class="footer">
+    <button mat-raised-button color="primary" (click)="check()">submit</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</div>

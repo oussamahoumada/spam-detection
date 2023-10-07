@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 const MaterialComponents = [
   MatMenuModule,
+  MatTabsModule,
   MatSortModule,
   MatIconModule,
   MatInputModule,
@@ -21,10 +23,10 @@ const MaterialComponents = [
   MatSelectModule,
   MatFormFieldModule,
   MatPaginatorModule,
-]
+];
 
 @NgModule({
   imports: [MaterialComponents],
-  exports: [MaterialComponents]
+  exports: [MaterialComponents],
 })
-export class MaterialModule { }
+export class MaterialModule {}
