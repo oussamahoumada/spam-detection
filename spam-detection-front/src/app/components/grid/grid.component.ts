@@ -15,7 +15,7 @@ export class GridComponent implements OnInit {
 
   constructor(private dialog: MatDialog) {}
   ngOnInit() {
-    this.rowData = this.data.filter((fl) => fl.Type == 'MAIL');
+    this.rowData = this.data;
   }
 
   columnDefs: ColDef[] = [
@@ -29,12 +29,12 @@ export class GridComponent implements OnInit {
     },
     {
       width: 200,
-      field: 'Subject',
+      field: 'Objet',
       lockVisible: true,
     },
     {
       width: 200,
-      field: 'Sender',
+      field: 'Expediteur',
     },
     {
       width: 800,
@@ -42,7 +42,6 @@ export class GridComponent implements OnInit {
     },
     {
       width: 100,
-      hide: true,
       field: 'Type',
     },
   ];
@@ -54,18 +53,41 @@ export class GridComponent implements OnInit {
   };
 
   data = [
-    { Subject: 'Porsche', Sender: 'Jhon', Mail: 'good morning', Type: 'MAIL' },
     {
-      Subject: 'Ford',
-      Sender: 'cedric',
-      Mail: 'hello this is a mail test',
       Type: 'MAIL',
+      Objet: 'hello',
+      Expediteur: 'Jhon@mail.com',
+      Mail: 'good morning this mail is empty',
     },
     {
-      Subject: 'Toyota',
-      Sender: 'fredric',
-      Mail: 'hello will you join me to day to a meeting',
       Type: 'SPAM',
+      Objet: 'you win',
+      Expediteur: 'cedric@mail.com',
+      Mail: 'hello you win 532$',
+    },
+    {
+      Type: 'MAIL',
+      Objet: 'meeting',
+      Expediteur: 'fredric@mail.com',
+      Mail: 'hello will you join me to day to a meeting',
+    },
+    {
+      Type: 'MAIL',
+      Objet: 'Say hello',
+      Expediteur: 'Jhon@mail.com',
+      Mail: 'good morning this mail is empty',
+    },
+    {
+      Type: 'SPAM',
+      Objet: 'test',
+      Expediteur: 'cedric@mail.com',
+      Mail: 'hello surprise you win 10000$',
+    },
+    {
+      Type: 'MAIL',
+      Objet: 'meeting',
+      Expediteur: 'fredric@mail.com',
+      Mail: 'hello will you join me to day to a meeting',
     },
   ];
 
@@ -80,15 +102,22 @@ export class GridComponent implements OnInit {
   getContextMenuItems(params: any): any {
     var context = [
       {
-        name: 'remove this mail',
+        name: 'remove this mail...',
         action: () => {
           console.log(params.node.data);
         },
       },
       {
-        name: 'remove all spams',
+        name: 'remove all SPAMs...',
         action: () => {
-          console.log('do something');
+          console.log('remove SPAMs');
+        },
+      },
+      {
+        name: 'this is not a SAPM?',
+        disabled: params.node.data.Type != 'SPAM',
+        action: () => {
+          console.log('set spam to mail');
         },
       },
       'separator',
@@ -98,10 +127,21 @@ export class GridComponent implements OnInit {
   }
 
   mailFilter(val: any) {
-    this.rowData = this.data.filter((fl) => fl.Type == val.tab.textLabel);
+    if (val.tab.textLabel == 'ALL') {
+      this.rowData = this.data;
+    } else {
+      this.rowData = this.data.filter((fl) => fl.Type == val.tab.textLabel);
+    }
   }
 
   newMail() {
     this.dialog.open(MailComponent, { width: '800px' });
+  }
+
+  public getRowStyle(params: any) {
+    if (params.node.data.Type == 'SPAM') {
+      return { background: 'red' };
+    }
+    return { background: 'white' };
   }
 }
