@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { ColDef } from 'ag-grid-community';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -97,6 +98,7 @@ export class GridComponent implements OnInit {
       minWidth: 100,
       filter: true,
     },
+    context: { thisComponent: this },
   };
 
   getContextMenuItems(params: any): any {
@@ -104,20 +106,20 @@ export class GridComponent implements OnInit {
       {
         name: 'remove this mail...',
         action: () => {
-          console.log(params.node.data);
+          params.context.thisComponent.removeMail(params.node.data);
         },
       },
       {
         name: 'remove all SPAMs...',
         action: () => {
-          console.log('remove SPAMs');
+          params.context.thisComponent.removeAllSpams();
         },
       },
       {
         name: 'this is not a SAPM?',
         disabled: params.node.data.Type != 'SPAM',
         action: () => {
-          console.log('set spam to mail');
+          params.context.thisComponent.checkMail(params.node.data);
         },
       },
       'separator',
@@ -143,5 +145,17 @@ export class GridComponent implements OnInit {
       return { background: 'red' };
     }
     return { background: 'white' };
+  }
+
+  checkMail(mail: any) {
+    console.log(mail);
+  }
+
+  removeAllSpams() {
+    Swal.fire('warning', 'Are you sure you want to delete all spams', 'question');
+  }
+
+  removeMail(mail: any) {
+    console.log(mail);
   }
 }
