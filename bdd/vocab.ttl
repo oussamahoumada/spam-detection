@@ -1,0 +1,101 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix o: <http://omeka.org/s/vocabs/o#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix jdc: <https://spamDetection.univ-paris8.fr/onto/jdc#> .
+@prefix ma: <http://www.w3.org/ns/ma-ont#>.
+
+<https://spamDetection.univ-paris8.fr/onto/jdc#> a owl:Ontology ;
+    dcterms:title "Spam Detection" .
+
+jdc:Mail a rdfs:Class ;
+    rdfs:label "Mail" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:Personne a rdfs:Class ;
+    rdfs:label "Personne" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:Compte a rdfs:Class ;
+    rdfs:label "Compte" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:idPers a rdf:Property ;
+    rdfs:label "idPers" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:idMail a rdf:Property ;
+    rdfs:label "idMail" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+
+jdc:name a rdf:Property ;
+    rdfs:label "name" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:dateNaissance a rdf:Property ;
+    rdfs:label "dateNaissance" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:gender a rdf:Property ;
+    rdfs:label "gender" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:mailAdress a rdf:Property ;
+    rdfs:label "mailAdress" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:passWord a rdf:Property ;
+    rdfs:label "passWord" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:sujet a rdf:Property ;
+    rdfs:label "sujet" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:content a rdf:Property ;
+    rdfs:label "content" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:type a rdf:Property ;
+    rdfs:label "type" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+jdc:createdAt a rdf:Property ;
+    rdfs:label "created at" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+
+jdc:sender a rdf:Property ;
+    rdfs:label "sender" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+
+jdc:reciever a rdf:Property ;
+    rdfs:label "reciever" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .
+
+
+jdc:pers_id a rdf:Property ;
+    rdfs:label "pers_id" ;
+    rdfs:domain o:Resource ;
+    vs:term_status "experimental" .

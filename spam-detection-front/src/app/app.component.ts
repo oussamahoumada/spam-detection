@@ -9,4 +9,7 @@ export class AppComponent {
   title = 'spam-detection-front';
   constructor() {
   }
+  tst(ev:any) {
+    console.log(ev)
+  }
 }

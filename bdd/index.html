@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-family: arial;
+            display: inline-block;
+            width: 400px;
+            margin: 1%;
+        }
+
+        .price {
+            color: grey;
+            font-size: 22px;
+        }
+
+        .chartContainer {
+            padding-bottom: 10%;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            text-align: -webkit-center;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: darkslategray;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            margin-bottom: 2%;
+            margin-right: 40%;
+        }
+
+        .button:hover {
+            background-color: darkgray
+        }
+
+        .button:active {
+            background-color: darkslategrey;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MAILS</h1>
+    <div>
+        <button id="myBtn" class="button">Chart</button>
+        <input type="text" name="filter" id="filter" placeholder="filter" oninput="rebuild(this.value)">
+    </div>
+
+    <div id="cardContainer"></div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="chartContainer">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        let url = prompt("URL : ");
+        d3.text(url)
+            .then(function (responseText) {
+                let data = JSON.parse(responseText);
+                let mails = [];
+                data.forEach((element) => {
+                    let m = {
+                        content: element["jdc:content"][0]["@value"],
+                        creator: element["jdc:sender"][0]["@value"],
+                        type: element["jdc:type"][0]["@value"],
+                        title: element["jdc:sujet"][0]["@value"],
+                    };
+                    mails.push(m);
+                });
+                var content = "";
+                mails.forEach((el) => {
+                    content +=
+                        `<div class="card">
+                            <h1>${el.title}</h1>
+                            <p class="price">${el.content}</p>
+                            <p>${el.creator}</p>
+                            <p>${el.type}</p>
+                        </div>`
+                })
+                localStorage.setItem("mailsList", JSON.stringify(mails));
+                document.getElementById("cardContainer").innerHTML = content;
+
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: ['Ham', 'Spam'],
+                        datasets: [{
+                            label: '# Mails',
+                            data: [mails.filter(fl => fl.type == "Ham").length, mails.filter(fl => fl.type == "Spam").length],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.error(
+                    "Une erreur s'est produite lors de la récupération de la page : " + error
+                );
+            });
+
+        function rebuild(value) {
+            value = value.toUpperCase();
+            let mails = JSON.parse(localStorage.getItem("mailsList")).filter(fl => {
+                return ((fl.content).toUpperCase().includes(value) || (fl.creator).toUpperCase().includes(value) || (fl.type).toUpperCase().includes(value) || (fl.title).toUpperCase().includes(value))
+            });
+            var content = "";
+            mails.forEach((el) => {
+                content +=
+                    `<div class="card">
+                        <h1>${el.title}</h1>
+                        <p class="price">${el.content}</p>
+                        <p>${el.creator}</p>
+                        <p>${el.type}</p>
+                    </div>`
+            })
+            document.getElementById("cardContainer").innerHTML = content;
+        }
+
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () { modal.style.display = "block"; }
+        span.onclick = function () { modal.style.display = "none"; }
+        window.onclick = function (event) { if (event.target == modal) { modal.style.display = "none"; } }
+    </script>
+</body>
+
+</html>
