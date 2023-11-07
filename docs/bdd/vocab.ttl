@@ -47,11 +47,6 @@ spd:dateNaissance a rdf:Property ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-spd:gender a rdf:Property ;
-    rdfs:label "gender" ;
-    rdfs:domain o:Resource ;
-    vs:term_status "experimental" .
-
 spd:mailAdress a rdf:Property ;
     rdfs:label "mailAdress" ;
     rdfs:domain o:Resource ;
