@@ -1177,7 +1177,7 @@ INSERT INTO `vocabulary` (`id`, `owner_id`, `namespace_uri`, `prefix`, `label`, 
 (2, NULL, 'http://purl.org/dc/dcmitype/', 'dctype', 'Dublin Core Type', 'Basic resource types (DCMI Type Vocabulary)'),
 (3, NULL, 'http://purl.org/ontology/bibo/', 'bibo', 'Bibliographic Ontology', 'Bibliographic metadata (BIBO)'),
 (4, NULL, 'http://xmlns.com/foaf/0.1/', 'foaf', 'Friend of a Friend', 'Relationships between people and organizations (FOAF)'),
-(8, 1, 'https://spamDetection.univ-paris8.fr/onto/jdc#', 'jdc', 'SpamDetection', '');
+(8, 1, 'https://spamDetection.univ-paris8.fr/onto/spd#', 'spd', 'SpamDetection', '');
 
 --
 -- Index pour les tables déchargées

@@ -120,10 +120,10 @@
                 let mails = [];
                 data.forEach((element) => {
                     let m = {
-                        content: element["jdc:content"][0]["@value"],
-                        creator: element["jdc:sender"][0]["@value"],
-                        type: element["jdc:type"][0]["@value"],
-                        title: element["jdc:sujet"][0]["@value"],
+                        content: element["spd:content"][0]["@value"],
+                        creator: element["spd:sender"][0]["@value"],
+                        type: element["spd:type"][0]["@value"],
+                        title: element["spd:sujet"][0]["@value"],
                     };
                     mails.push(m);
                 });
