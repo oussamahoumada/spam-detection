@@ -1,5 +1,5 @@
 {
-    "o:label": "Comte",
+    "o:label": "account",
     "o:resource_template_property": [
         {
             "o:alternate_label": null,
@@ -37,5 +37,11 @@
             "local_name": "pers_id",
             "label": "pers_id"
         }
-    ]
+    ],
+    "o:resource_class": {
+        "vocabulary_namespace_uri": "https:\/\/spamDetection.univ-paris8.fr\/onto\/spd#",
+        "vocabulary_label": "SpamDetection",
+        "local_name": "account",
+        "label": "account"
+    }
 }

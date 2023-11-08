@@ -11,18 +11,18 @@
 <https://spamDetection.univ-paris8.fr/onto/spd#> a owl:Ontology ;
     dcterms:title "Spam Detection" .
 
-spd:Mail a rdfs:Class ;
-    rdfs:label "Mail" ;
+spd:mail a rdfs:Class ;
+    rdfs:label "mail" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-spd:Personne a rdfs:Class ;
-    rdfs:label "Personne" ;
+spd:person a rdfs:Class ;
+    rdfs:label "person" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 
-spd:Compte a rdfs:Class ;
-    rdfs:label "Compte" ;
+spd:account a rdfs:Class ;
+    rdfs:label "account" ;
     rdfs:domain o:Resource ;
     vs:term_status "experimental" .
 

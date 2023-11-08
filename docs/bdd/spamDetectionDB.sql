@@ -1,7 +1,6 @@
 CREATE TABLE `person` (
   `idPers` integer PRIMARY KEY,
   `name` varchar(255),
-  `gender` varchar(255),
   `dateNaissance` timestamp
 );
 
