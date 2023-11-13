@@ -14,9 +14,9 @@ personne_model = api.model("person",{
 })
 
 account_model = api.model("account",{
-    'passWord':fields.String,
     'pers_id' : fields.Integer,
     'mailAdress' : fields.String,
+    'token' : fields.String,
     
     'pers':fields.List(fields.Nested(personne_model)),
 })
