@@ -6,7 +6,7 @@
 # Membre de l'équipe : 
 > HOUMADA Oussama
 > KACHER Aghiles
-
+> MALLEK Kenza
 # Taches :
 > HOUMADA Oussama 
 * Conception et développement de l'application
