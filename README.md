@@ -26,6 +26,11 @@
                 - Decider si le mail courant est un SPAM ou pas
                 - Exporter les données de la grille en fichier (Excel, CSV)
         * Ajouter une boutton qui permet d'ouvrire un dialog dans le quel on peut crée un nouveau mail
-> KACHER Aghiles   
+> KACHER Aghiles
+
+
+> MALLEK Kenza
+
+
 # Diagramme de Gantt :
 * [URL](https://docs.google.com/spreadsheets/d/e/2PACX-1vQNUycuxxUXHO7hyLsknVPTXSqUuOJ9oKH6HAsavWRa2EbRrsSJgllFVU7PgmPpIUm5JBPVHuhpol3d/pubhtml)
