@@ -6,7 +6,6 @@ from ..extensions import db
 
 class person(db.Model):
     name = db.Column(db.String(250))
-    gender = db.Column(db.String(250))
     dateNaissance = db.Column(db.Date)
     idPers = db.Column(db.Integer, primary_key=True)
 

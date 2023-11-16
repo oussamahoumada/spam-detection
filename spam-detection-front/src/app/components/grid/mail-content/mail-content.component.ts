@@ -8,10 +8,13 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
   styleUrls: ['./mail-content.component.css'],
 })
 export class MailContentComponent implements ICellRendererAngularComp {
-  public Mail = '';
+  public Content = '';
   public Type = '';
   public Sender = '';
   public Subject = '';
+  public Reciever = '';
+  public CreatedAt = '';
+
   private params!: ICellRendererParams;
 
   constructor() {}
@@ -22,9 +25,11 @@ export class MailContentComponent implements ICellRendererAngularComp {
 
   agInit(params: ICellRendererParams) {
     this.params = params;
-    this.Type = params.node.data.Type;
-    this.Mail = params.node.data.Mail;
-    this.Subject = params.node.data.Objet;
-    this.Sender = params.node.data.Expediteur;
+    this.Type = params.node.data.type;
+    this.Content = params.node.data.content;
+    this.Subject = params.node.data.sujet;
+    this.Sender = params.node.data.sender;
+    this.Reciever = params.node.data.reciever;
+    this.CreatedAt = params.node.data.created_at;
   }
 }

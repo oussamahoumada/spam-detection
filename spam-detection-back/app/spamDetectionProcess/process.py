@@ -23,10 +23,14 @@ def preprocess(text):
 
 tfidf = TfidfVectorizer() 
 Knn_classifier = KNeighborsClassifier()
+import os
 
-#
+cwd = os.getcwd()  # Get the current working directory (cwd)
+files = os.listdir(cwd)  # Get all the files in that directory
+#print("Files in %r: %s" % (cwd, files))
+
 def spamDetection():
-    df = pd.read_csv("emails.csv")
+    df = pd.read_csv(cwd+"/app/spamDetectionProcess/emails.csv")
     
     df['text'] = df['text'].apply(lambda text: preprocess(text))
 
@@ -40,9 +44,9 @@ def spamDetection():
     
     Knn_classifier.fit(X_train,Y_train)
     Y_pred = Knn_classifier.predict(X_test)
-    print("Accuracy : ",accuracy_score(Y_test,Y_pred))
+    '''print("Accuracy : ",accuracy_score(Y_test,Y_pred))
     print("Precision : ",precision_score(Y_test,Y_pred))
-    print("Recall : ",recall_score(Y_test,Y_pred))
+    print("Recall : ",recall_score(Y_test,Y_pred))'''
 
 def demo(txt):
     
@@ -53,4 +57,3 @@ def demo(txt):
     
     return result
 
-spamDetection()

@@ -6,22 +6,22 @@
       <input
         matInput
         placeholder="mail@mail.com"
-        formControlName="receiver"
+        formControlName="reciever"
         required
       />
-      <mat-error *ngIf="form.controls['receiver'].invalid">{{
+      <mat-error *ngIf="form.controls['reciever'].invalid">{{
         "Invalid mail"
       }}</mat-error> </mat-form-field
     ><br />
     <mat-form-field>
-      <mat-label>Objet</mat-label>
-      <input matInput formControlName="objet" required />
+      <mat-label>Sujet</mat-label>
+      <input matInput formControlName="sujet" required />
     </mat-form-field>
     <mat-menu #menu="matMenu">
       <app-text-style></app-text-style>
     </mat-menu>
     <textarea
-      formControlName="mailContent"
+      formControlName="content"
       id="textarea"
       rows="20"
       cols="90"

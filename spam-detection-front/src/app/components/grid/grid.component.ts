@@ -1,8 +1,10 @@
 import Swal from 'sweetalert2';
 import { ColDef } from 'ag-grid-community';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 import { MailComponent } from './mail/mail.component';
+import { MailService } from 'src/app/services/mail.service';
 import { MailContentComponent } from './mail-content/mail-content.component';
 
 @Component({
@@ -11,14 +13,26 @@ import { MailContentComponent } from './mail-content/mail-content.component';
   styleUrls: ['./grid.component.css'],
 })
 export class GridComponent implements OnInit {
-  public mailContentComponent: any = MailContentComponent;
+  public data: any;
   public rowData: any;
+  public mailContentComponent: any = MailContentComponent;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private mailService: MailService,
+    private cookieService: CookieService
+  ) {}
   ngOnInit() {
-    this.rowData = this.data;
+    this.loadData();
   }
-
+  loadData() {
+    this.mailService
+      .getMails(this.cookieService.get('mail'))
+      .subscribe((res) => {
+        this.rowData = res;
+        this.data = res;
+      });
+  }
   columnDefs: ColDef[] = [
     {
       width: 110,
@@ -30,20 +44,39 @@ export class GridComponent implements OnInit {
     },
     {
       width: 200,
-      field: 'Objet',
+      headerName: 'Sujet',
+      field: 'sujet',
       lockVisible: true,
     },
     {
       width: 200,
-      field: 'Expediteur',
+      headerName: 'Sender',
+      field: 'sender',
+    },
+    {
+      width: 200,
+      headerName: 'Reciever',
+      field: 'reciever',
     },
     {
       width: 800,
-      field: 'Mail',
+      headerName: 'Content',
+      field: 'content',
     },
     {
       width: 100,
-      field: 'Type',
+      headerName: 'Type',
+      field: 'type',
+    },
+    {
+      width: 100,
+      headerName: 'Created At',
+      field: 'created_at',
+    },
+    {
+      width: 100,
+      headerName: 'Mail id',
+      field: 'idMail',
     },
   ];
   public defaultColDef: ColDef = {
@@ -52,7 +85,7 @@ export class GridComponent implements OnInit {
     resizable: true,
     editable: false,
   };
-
+  /*
   data = [
     {
       Type: 'MAIL',
@@ -91,7 +124,7 @@ export class GridComponent implements OnInit {
       Mail: 'hello will you join me to day to a meeting',
     },
   ];
-
+*/
   gridOptions = {
     defaultColDef: {
       flex: 1,
@@ -117,7 +150,7 @@ export class GridComponent implements OnInit {
       },
       {
         name: 'this is not a SAPM?',
-        disabled: params.node.data.Type != 'SPAM',
+        disabled: params.node.data.type != 'spam',
         action: () => {
           params.context.thisComponent.checkMail(params.node.data);
         },
@@ -132,16 +165,26 @@ export class GridComponent implements OnInit {
     if (val.tab.textLabel == 'ALL') {
       this.rowData = this.data;
     } else {
-      this.rowData = this.data.filter((fl) => fl.Type == val.tab.textLabel);
+      this.rowData = this.data.filter(
+        (fl: any) => fl.type == String(val.tab.textLabel).toLocaleLowerCase()
+      );
     }
   }
 
   newMail() {
-    this.dialog.open(MailComponent, { width: '800px' });
+    const clientDialog = this.dialog.open(MailComponent, { width: '800px' });
+    clientDialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.mailService.addMail(result).subscribe((res) => {
+          this.loadData();
+          console.log(res);
+        });
+      }
+    });
   }
 
   public getRowStyle(params: any) {
-    if (params.node.data.Type == 'SPAM') {
+    if (params.node.data.type == 'spam') {
       return { background: 'red' };
     }
     return { background: 'white' };
@@ -152,7 +195,11 @@ export class GridComponent implements OnInit {
   }
 
   removeAllSpams() {
-    Swal.fire('warning', 'Are you sure you want to delete all spams', 'question');
+    Swal.fire(
+      'warning',
+      'Are you sure you want to delete all spams',
+      'question'
+    );
   }
 
   removeMail(mail: any) {

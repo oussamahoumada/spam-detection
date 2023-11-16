@@ -7,6 +7,7 @@ from flask_restx import Resource, Namespace
 
 from ..extensions import db
 from ..models.models import mail
+from ..spamDetectionProcess.process import demo
 from ..models.api_models import mail_model, mail_input_model
 
 mailNs = Namespace("Mail")
@@ -18,21 +19,29 @@ class mailAPI(Resource):
         req = mail.query.filter(or_(mail.sender==Adress,mail.reciever==Adress)).all()
         return req
     
-@mailNs.route("/<string:reciever>/<string:sender>")
+@mailNs.route("/")
 class mailAPI(Resource):
-    @mailNs.expect(mail_model)
-    @mailNs.marshal_with(mail_input_model)
-    def post(self,reciever,sender):
-        
+    @mailNs.expect(mail_input_model)
+    @mailNs.marshal_with(mail_model)
+    def post(self):       
         m = mail(
-            sender=sender,
-            reciever=reciever,
-            type=mailNs.payload["type"],
-            sujet=mailNs.payload["sujet"],
-            content=mailNs.payload["content"],
-            created_at=mailNs.payload["created_at"],
+            sender=mailNs.payload["sender"],
+            sujet = mailNs.payload["sujet"],
+            content = mailNs.payload["content"],
+            reciever = mailNs.payload["reciever"],
+            created_at = mailNs.payload["created_at"],
+            type = checkMail(mailNs.payload["content"]),
         )
         db.session.add(m)
         db.session.commit()
         
         return (m,201)
+
+def checkMail(content):
+    if(demo(content) == 0):
+        result = "mail"
+        
+    if(demo(content) == 1):
+        result = "spam"
+    
+    return result
