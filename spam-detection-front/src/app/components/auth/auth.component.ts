@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
           (res: any) => {
             if (res) {
               localStorage.setItem('token', res.token);
-              this.router.navigate(['grid']);
+              this.router.navigate(['home']);
             } else {
               Swal.fire('warning', 'mail/passWord incorrect', 'warning');
             }
