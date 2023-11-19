@@ -17,8 +17,8 @@ export class AuthComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthService,
     private router: Router,
+    private authService: AuthService,
     private cookieService: CookieService
   ) {}
 
