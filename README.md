@@ -45,4 +45,4 @@
 
 # Diagramme de Base de donne :
 
-- [database](https://dbdiagram.io/d/bdd-65439ea07d8bbd64655abf66)
+- [database](https://github.com/oussamahoumada/spam-detection/blob/main/docs/bdd/bdd.svg)
