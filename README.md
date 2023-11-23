@@ -1,6 +1,6 @@
 # Titre :
 
-> _Detection des SPAM_
+> -Detection des SPAM-
 
 # Descriptif du projet
 
@@ -17,20 +17,20 @@
 > HOUMADA Oussama
 
 - Conception et développement de l'application + Coté back :
-  _ Création d'une API en utilisant flask(Python)
-  _ L'utilisation de L'algorithme K plus proches voisins (KNN), qu'est une méthode d'apprentissage automatique. Il est utilisé pour la classification et la régression des données, en se basant sur la proximité des points de données dans un espace multidimensionnel. + Coté front :
-  _ Création d'une application Angular
-  _ Afficher la list des couriers, trois option d'affichage possible(tous les courier, Courier normal, SPAM) avec les fonctionalités suivante :
-  _ Trie
-  _ Filtrage
-  _ Suppression
-  _ Affichage du contenue du courier
-  _ Un click droit dans la grille permer de : - Supprimer tous les spam - Decider si le mail courant est un SPAM ou pas - Exporter les données de la grille en fichier (Excel, CSV)
-  _ Ajouter une boutton qui permet d'ouvrire un dialog dans le quel on peut crée un nouveau mail \* Integration des interfaces
+  - Création d'une API en utilisant flask(Python)
+  - L'utilisation de L'algorithme K plus proches voisins (KNN), qu'est une méthode d'apprentissage automatique. Il est utilisé pour la classification et la régression des données, en se basant sur la proximité des points de données dans un espace multidimensionnel. + Coté front :
+  - Création d'une application Angular
+  - Afficher la list des couriers, trois option d'affichage possible(tous les courier, Courier normal, SPAM) avec les fonctionalités suivante :
+  - Trie
+  - Filtrage
+  - Suppression
+  - Affichage du contenue du courier
+  - Un click droit dans la grille permer de : - Supprimer tous les spam - Decider si le mail courant est un SPAM ou pas - Exporter les données de la grille en fichier (Excel, CSV)
+  - Ajouter une boutton qui permet d'ouvrire un dialog dans le quel on peut crée un nouveau mail \* Integration des interfaces
   > KACHER Aghiles
 - Conception et développement de l'application + Coté back :
-  _ Creation du base de donnée (création des tables, relation...)
-  _ Recuperation des données pour les tests + Coté front : \* Style d'interfaces
+  - Creation du base de donnée (création des tables, relation...)
+  - Recuperation des données pour les tests + Coté front : \* Style d'interfaces
   > MALLEK Kenza
 - Conception et développement de l'application
   - Coté back :
