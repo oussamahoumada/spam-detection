@@ -2,8 +2,6 @@ import Swal from 'sweetalert2';
 import { ColDef } from 'ag-grid-community';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialog } from '@angular/material/dialog';
-import { MailComponent } from './mail/mail.component';
 import { MailService } from 'src/app/services/mail.service';
 import { MailContentComponent } from './mail-content/mail-content.component';
 
@@ -18,12 +16,54 @@ export class GridComponent implements OnInit {
   public mailContentComponent: any = MailContentComponent;
 
   constructor(
-    private dialog: MatDialog,
     private mailService: MailService,
     private cookieService: CookieService
   ) {}
+
   ngOnInit() {
     this.loadData();
+
+    this.mailService.loadData.subscribe((res: any) => {
+      this.loadData();
+    });
+
+    this.mailService.search.subscribe((res: any) => {
+      this.rowData = this.data.filter(
+        (fl: any) =>
+          fl.type.includes(res) ||
+          fl.sujet.includes(res) ||
+          fl.sender.includes(res) ||
+          fl.content.includes(res) ||
+          fl.reciever.includes(res)
+      );
+    });
+
+    this.mailService.mailShowFilter.subscribe((res: any) => {
+      switch (res) {
+        case 'ALL':
+          this.rowData = this.data;
+          break;
+        case 'spams':
+          this.rowData = this.data.filter((fl: any) => fl.type == 'spam');
+          break;
+        case 'notification':
+          this.rowData = this.data.filter((fl: any) => fl.type == 'mail');
+          break;
+        case 'sended':
+          this.rowData = this.data.filter(
+            (fl: any) => fl.sender == this.cookieService.get('mail')
+          );
+          break;
+        case 'recieved':
+          this.rowData = this.data.filter(
+            (fl: any) => fl.reciever == this.cookieService.get('mail')
+          );
+          break;
+        default:
+          this.rowData = this.data.filter((fl: any) => fl.type == 'spam');
+          break;
+      }
+    });
   }
   loadData() {
     this.mailService
@@ -44,39 +84,39 @@ export class GridComponent implements OnInit {
     },
     {
       width: 200,
-      headerName: 'Sujet',
       field: 'sujet',
       lockVisible: true,
+      headerName: 'Sujet',
     },
     {
       width: 200,
-      headerName: 'Sender',
       field: 'sender',
+      headerName: 'Sender',
     },
     {
       width: 200,
-      headerName: 'Reciever',
       field: 'reciever',
+      headerName: 'Reciever',
     },
     {
       width: 800,
-      headerName: 'Content',
       field: 'content',
+      headerName: 'Content',
     },
     {
       width: 100,
-      headerName: 'Type',
       field: 'type',
+      headerName: 'Type',
     },
     {
       width: 100,
-      headerName: 'Created At',
       field: 'created_at',
+      headerName: 'Created At',
     },
     {
       width: 100,
-      headerName: 'Mail id',
       field: 'idMail',
+      headerName: 'Mail id',
     },
   ];
   public defaultColDef: ColDef = {
@@ -85,51 +125,12 @@ export class GridComponent implements OnInit {
     resizable: true,
     editable: false,
   };
-  /*
-  data = [
-    {
-      Type: 'MAIL',
-      Objet: 'hello',
-      Expediteur: 'Jhon@mail.com',
-      Mail: 'good morning this mail is empty',
-    },
-    {
-      Type: 'SPAM',
-      Objet: 'you win',
-      Expediteur: 'cedric@mail.com',
-      Mail: 'hello you win 532$',
-    },
-    {
-      Type: 'MAIL',
-      Objet: 'meeting',
-      Expediteur: 'fredric@mail.com',
-      Mail: 'hello will you join me to day to a meeting',
-    },
-    {
-      Type: 'MAIL',
-      Objet: 'Say hello',
-      Expediteur: 'Jhon@mail.com',
-      Mail: 'good morning this mail is empty',
-    },
-    {
-      Type: 'SPAM',
-      Objet: 'test',
-      Expediteur: 'cedric@mail.com',
-      Mail: 'hello surprise you win 10000$',
-    },
-    {
-      Type: 'MAIL',
-      Objet: 'meeting',
-      Expediteur: 'fredric@mail.com',
-      Mail: 'hello will you join me to day to a meeting',
-    },
-  ];
-*/
+
   gridOptions = {
     defaultColDef: {
       flex: 1,
-      minWidth: 100,
       filter: true,
+      minWidth: 100,
     },
     context: { thisComponent: this },
   };
@@ -139,20 +140,23 @@ export class GridComponent implements OnInit {
       {
         name: 'remove this mail...',
         action: () => {
-          params.context.thisComponent.removeMail(params.node.data);
+          if (params.node.data != null && params.node.data != undefined)
+            params.context.thisComponent.removeMail([params.node.data.idMail]);
         },
       },
       {
         name: 'remove all SPAMs...',
         action: () => {
-          params.context.thisComponent.removeAllSpams();
+          if (params.node.data != null && params.node.data != undefined)
+            params.context.thisComponent.removeAllSpams();
         },
       },
       {
         name: 'this is not a SAPM?',
         disabled: params.node.data.type != 'spam',
         action: () => {
-          params.context.thisComponent.checkMail(params.node.data);
+          if (params.node.data != null && params.node.data != undefined)
+            params.context.thisComponent.checkMail(params.node.data);
         },
       },
       'separator',
@@ -171,18 +175,6 @@ export class GridComponent implements OnInit {
     }
   }
 
-  newMail() {
-    const clientDialog = this.dialog.open(MailComponent, { width: '800px' });
-    clientDialog.afterClosed().subscribe((result) => {
-      if (result) {
-        this.mailService.addMail(result).subscribe((res) => {
-          this.loadData();
-          console.log(res);
-        });
-      }
-    });
-  }
-
   public getRowStyle(params: any) {
     if (params.node.data.type == 'spam') {
       return { background: 'red' };
@@ -191,18 +183,38 @@ export class GridComponent implements OnInit {
   }
 
   checkMail(mail: any) {
-    console.log(mail);
-  }
-
-  removeAllSpams() {
-    Swal.fire(
-      'warning',
-      'Are you sure you want to delete all spams',
-      'question'
+    this.mailService.updateMail(mail.idMail).subscribe(
+      (res) => {
+        this.loadData();
+        Swal.fire('Success', res, 'success');
+      },
+      (err) => {
+        Swal.fire('Error', err, 'error');
+      }
     );
   }
 
-  removeMail(mail: any) {
-    console.log(mail);
+  removeAllSpams() {
+    this.mailService.deleteAllSpams().subscribe(
+      (res) => {
+        this.loadData();
+        Swal.fire('Success', res, 'success');
+      },
+      (err) => {
+        Swal.fire('Error', err, 'error');
+      }
+    );
+  }
+
+  removeMail(ids: any) {
+    this.mailService.deleteMails(ids).subscribe(
+      (res) => {
+        this.loadData();
+        Swal.fire('Success', res, 'success');
+      },
+      (err) => {
+        Swal.fire('Error', err, 'error');
+      }
+    );
   }
 }

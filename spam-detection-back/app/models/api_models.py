@@ -44,3 +44,16 @@ mail_input_model = api.model("mailInput",{
     'reciever' : fields.String,	
     'created_at' : fields.Date,	
 })
+
+login_input_model = api.model("login_input",{
+    'passWord' : fields.String,
+    'mailAdress' : fields.String,
+})
+
+mail_delete_model = api.model("mail_delete_input",{
+    'ids' : fields.Raw(),
+})
+
+mail_update_model = api.model("mail_update_input",{
+    'idMail' : fields.Integer,
+})

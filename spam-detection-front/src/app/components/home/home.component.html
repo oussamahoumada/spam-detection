@@ -16,13 +16,13 @@
     <div class="header">
       <div class="menu-circle"></div>
       <div class="header-menu">
-        <a class="menu-link is-active" href="#">New Mail</a>
+        <a class="menu-link is-active" (click)="newMail()">New Mail</a>
         <a class="menu-link notify" href="#">Notifications</a>
         <a class="menu-link" href="#"></a>
         <a class="menu-link notify" href="#"></a>
       </div>
       <div class="search-bar">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" #sr (input)="doSerach(sr)">
       </div>
       <div class="header-profile">
         <div class="notification">
@@ -38,10 +38,10 @@
         <div class="side-wrapper">
           <div class="side-title">Generale</div>
           <div class="side-menu">
-            <a href="#">
+            <a (click)="filterMailList('sended')">
               Messages envoyés
             </a>
-            <a href="#">
+            <a (click)="filterMailList('recieved')">
               Boite de réception
               <span class="notification-number updates">3</span>
             </a>
@@ -50,17 +50,17 @@
         <div class="side-wrapper">
           <div class="side-title">Categories</div>
           <div class="side-menu">
-            <a href="#">
+            <a (click)="filterMailList('notification')">
               Notification
             </a>
-            <a href="#">
+            <a (click)="filterMailList('spams')">
               Spams
             </a>
           </div>
         </div>
       </div>
       <div class="main-container">
-        <div class="content-wrapper"  style="height: 90%">
+        <div class="content-wrapper" style="height: 100%">
           <app-grid></app-grid>
         </div>
       </div>

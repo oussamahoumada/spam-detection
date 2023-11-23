@@ -7,19 +7,23 @@ from flask import Response
 import secrets
 
 from ..extensions import db
-from ..models.models import account,person
-from ..models.api_models import account_model,account_input_model
+from ..models.models import account, person
+from ..models.api_models import account_model, account_input_model, login_input_model
 
 accountNs = Namespace("Authentication")
 
 class c_token :
     global token
 
-@accountNs.route("/login/<string:mailAdress>/<string:passWord>")
+@accountNs.route("/login")
 class accountAPI(Resource):
+    @accountNs.expect(login_input_model)
     @accountNs.marshal_list_with(account_model)
-    def get(self, mailAdress, passWord):
-        req = account.query.filter(account.mailAdress == mailAdress, account.passWord == passWord).first()
+    def post(self):
+        req = account.query.filter(
+            account.mailAdress == accountNs.payload["mailAdress"], 
+            account.passWord == accountNs.payload["passWord"]
+        ).first()
         if(req):
             req.token = secrets.token_hex()
             c_token.token = req.token
@@ -34,7 +38,6 @@ class accountAPI(Resource):
     def post(self):
         pers = person(
             name=accountNs.payload["name"],
-            gender=accountNs.payload["gender"],
             dateNaissance=accountNs.payload["dateNaissance"]
         )
         db.session.add(pers)

@@ -1,6 +1,6 @@
 <div
   [ngStyle]="
-    Type == 'SPAM' ? { 'background-color': 'red' } : { 'background-color': 'white' }
+    Type == 'spam' ? { 'background-color': 'red' } : { 'background-color': 'white' }
   "
 >
   <b> {{ Subject }} </b>
@@ -8,5 +8,5 @@
   <p><span>From : {{ Sender }} </span></p>
   <p><span> To : {{ Reciever }}</span></p>
   <p style="margin-left: 1%">{{ Content }}</p>
-  
+
 </div>

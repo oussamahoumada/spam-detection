@@ -14,10 +14,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { AuthComponent } from './components/auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +25,9 @@ import { AuthComponent } from './components/auth/auth.component';
     HomeComponent,
     GridComponent,
     MailComponent,
+    AuthComponent,
     TextStyleComponent,
     MailContentComponent,
-    AuthComponent,
   ],
   imports: [
     FormsModule,

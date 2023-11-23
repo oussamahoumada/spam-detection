@@ -2,13 +2,13 @@
 """
 @author: oussama
 """
-from sqlalchemy import or_
+from sqlalchemy import or_, delete
 from flask_restx import Resource, Namespace
 
 from ..extensions import db
 from ..models.models import mail
 from ..spamDetectionProcess.process import demo
-from ..models.api_models import mail_model, mail_input_model
+from ..models.api_models import mail_model, mail_input_model, mail_delete_model, mail_update_model
 
 mailNs = Namespace("Mail")
 
@@ -36,6 +36,37 @@ class mailAPI(Resource):
         db.session.commit()
         
         return (m,201)
+    
+    @mailNs.expect(mail_update_model)
+    def put(self):
+
+        getMail = mail.query.filter(mail.idMail == mailNs.payload["idMail"]).first()       
+        getMail.type = "mail"
+
+        db.session.flush()
+        db.session.commit()
+        
+        return ("update success",201)
+    
+@mailNs.route("/delete")
+class mailAPI(Resource):
+    @mailNs.expect(mail_delete_model)
+    def post(self):
+        lst=[]
+        for i in mailNs.payload["ids"]:
+            lst.append(i['id'])
+        mail_del = delete(mail).where(mail.idMail.in_(lst))
+        db.session.execute(mail_del)
+        db.session.commit()
+        return "delete success",200
+
+@mailNs.route("/delete_all_spams")
+class mailAPI(Resource):
+    def get(self):
+        mail_del = delete(mail).where(mail.type=="spam")
+        db.session.execute(mail_del)
+        db.session.commit()
+        return "success, all spams are deleted",200
 
 def checkMail(content):
     if(demo(content) == 0):

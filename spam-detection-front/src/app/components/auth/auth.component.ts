@@ -12,8 +12,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AuthComponent implements OnInit {
   public loginForm: FormGroup = new FormGroup({
-    pass: new FormControl(null, [Validators.required]),
-    mail: new FormControl(null, [Validators.required, Validators.email]),
+    passWord: new FormControl(null, [Validators.required]),
+    mailAdress: new FormControl(null, [Validators.required, Validators.email]),
+  });
+
+  public registerForm: FormGroup = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+    passWord: new FormControl(null, [Validators.required]),
+    dateNaissance: new FormControl(null, [Validators.required]),
+    mailAdress: new FormControl(null, [Validators.required, Validators.email]),
   });
 
   constructor(
@@ -22,35 +29,50 @@ export class AuthComponent implements OnInit {
     private cookieService: CookieService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.authService.logout();
+  }
 
   doAuthentication() {
     if (this.loginForm.valid) {
-      this.authService
-        .login(
-          this.loginForm.controls['mail'].value,
-          this.loginForm.controls['pass'].value
-        )
-        .subscribe(
-          (res: any) => {
-            if (res) {
-              //localStorage.setItem('token', res.token);
-              this.cookieService.set('token', res.token);
-              this.cookieService.set(
-                'mail',
-                this.loginForm.controls['mail'].value
-              );
-              this.router.navigate(['home']);
-            } else {
-              Swal.fire('warning', 'mail/passWord incorrect', 'warning');
-            }
-          },
-          () => {
-            Swal.fire('error', 'Somethng wints wrong', 'error');
+      this.authService.login(this.loginForm.value).subscribe(
+        (res: any) => {
+          if (res) {
+            this.cookieService.set('token', res.token);
+            this.cookieService.set(
+              'mail',
+              this.loginForm.controls['mailAdress'].value
+            );
+            this.router.navigate(['home']);
+          } else {
+            Swal.fire('Login', 'mail/passWord incorrect', 'warning');
           }
-        );
+        },
+        (err: any) => {
+          Swal.fire('Login', err, 'error');
+        }
+      );
     } else {
-      Swal.fire('warning', 'all fields are required', 'warning');
+      Swal.fire('Login', 'all fields are required', 'warning');
+    }
+  }
+
+  register() {
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe(
+        (res: any) => {
+          if (res) {
+            Swal.fire('Registration', 'Registration successed', 'success');
+          } else {
+            Swal.fire('Registration', 'mail/passWord incorrect', 'warning');
+          }
+        },
+        (err: any) => {
+          Swal.fire('Registration', err, 'error');
+        }
+      );
+    } else {
+      Swal.fire('Registration', 'all fields are required', 'warning');
     }
   }
 }
