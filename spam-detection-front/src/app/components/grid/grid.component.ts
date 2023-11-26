@@ -14,6 +14,7 @@ export class GridComponent implements OnInit {
   public data: any;
   public rowData: any;
   public mailContentComponent: any = MailContentComponent;
+  public class_grid = 'ag-theme-alpine';
 
   constructor(
     private mailService: MailService,
@@ -63,6 +64,13 @@ export class GridComponent implements OnInit {
           this.rowData = this.data.filter((fl: any) => fl.type == 'spam');
           break;
       }
+    });
+
+    this.mailService.setGridClass.subscribe((res) => {
+      this.class_grid =
+        this.class_grid == 'ag-theme-alpine-dark'
+          ? 'ag-theme-alpine'
+          : 'ag-theme-alpine-dark';
     });
   }
   loadData() {

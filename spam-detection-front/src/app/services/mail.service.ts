@@ -12,6 +12,7 @@ export class MailService {
   public search: EventEmitter<any> = new EventEmitter();
   public loadData: EventEmitter<boolean> = new EventEmitter();
   public mailShowFilter: EventEmitter<any> = new EventEmitter();
+  public setGridClass: EventEmitter<any> = new EventEmitter();
 
   getMails(mail: string): Observable<any> {
     return this.http.get(this.url + mail);

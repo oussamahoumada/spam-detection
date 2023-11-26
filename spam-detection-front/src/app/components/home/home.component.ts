@@ -16,8 +16,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private mailService: MailService
   ) {}
 
-  ngOnInit(): void {}
+  public notif_number = 0;
 
+  ngOnInit(): void {}
+  test() {
+    this.mailService.setGridClass.emit(true);
+  }
   ngAfterViewInit() {
     var s = document.createElement('script');
     s.type = 'text/javascript';
@@ -33,18 +37,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const clientDialog = this.dialog.open(MailComponent, { width: '800px' });
     clientDialog.afterClosed().subscribe((result) => {
       if (result) {
-        this.mailService.addMail(result).subscribe((res) => {
-          this.mailService.loadData.emit(true);
-          Swal.fire('Success', res, 'success');
-        },
+        this.mailService.addMail(result).subscribe(
+          (res) => {
+            this.mailService.loadData.emit(true);
+            Swal.fire('Success', res, 'success');
+          },
           (err) => {
             Swal.fire('Error', err, 'error');
-        });
+          }
+        );
       }
     });
   }
 
   doSerach(ev: any) {
-    this.mailService.search.emit(ev.value)
+    this.mailService.search.emit(ev.value);
   }
 }
