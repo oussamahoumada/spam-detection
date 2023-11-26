@@ -12,14 +12,13 @@ from sklearn.metrics import accuracy_score, recall_score, precision_score
 
 #Remove punctuation and ENGLISH_STOP_WORDS(array contain the stop words)
 def preprocess(text):
-        #remove punctuation and lowercase
-        text = "".join([t.lower() for t in text if t not in string.punctuation])
-        
-        #tokenize
-        tokens = text.split(" ") #"split demo" == ['split','demo']
-        
-        #filter out stopwords
-        return " ".join(t for t in tokens if t not in ENGLISH_STOP_WORDS)
+    #remove punctuation and lowercase (filter)
+    text = "".join([t.lower() for t in text if t not in string.punctuation])
+    
+    lst = text.split(" ")
+    
+    #filter out stopwords
+    return " ".join(t for t in lst if t not in ENGLISH_STOP_WORDS)
 
 tfidf = TfidfVectorizer() 
 Knn_classifier = KNeighborsClassifier()
@@ -48,7 +47,7 @@ def spamDetection():
     print("Precision : ",precision_score(Y_test,Y_pred))
     print("Recall : ",recall_score(Y_test,Y_pred))'''
 
-def demo(txt):
+def mail_check(txt):
     
     msg = [txt]
     processed = [preprocess(m) for m in msg]
@@ -56,4 +55,3 @@ def demo(txt):
     result = Knn_classifier.predict(vectors)
     
     return result
-

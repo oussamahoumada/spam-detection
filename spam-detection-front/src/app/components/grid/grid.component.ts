@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import { interval } from 'rxjs';
 import { ColDef } from 'ag-grid-community';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,8 +14,8 @@ import { MailContentComponent } from './mail-content/mail-content.component';
 export class GridComponent implements OnInit {
   public data: any;
   public rowData: any;
-  public mailContentComponent: any = MailContentComponent;
   public class_grid = 'ag-theme-alpine';
+  public mailContentComponent: any = MailContentComponent;
 
   constructor(
     private mailService: MailService,
@@ -22,6 +23,18 @@ export class GridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    interval(5000).subscribe((val: any) => {
+      this.mailService
+        .getMails(this.cookieService.get('mail'))
+        .subscribe((res) => {
+          if (this.data.length != res.length) {
+            this.rowData = res;
+            this.data = res;
+            console.log('new MAil recieved');
+          }
+        });
+    });
+
     this.loadData();
 
     this.mailService.loadData.subscribe((res: any) => {
@@ -187,7 +200,7 @@ export class GridComponent implements OnInit {
     if (params.node.data.type == 'spam') {
       return { background: 'red' };
     }
-    return { background: 'white' };
+    return params;
   }
 
   checkMail(mail: any) {

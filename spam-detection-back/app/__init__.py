@@ -15,8 +15,9 @@ spamDetection()
 def create_app():
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@localhost:3306/spam_detection_db"
-    CORS(app, resources={r"/Authentication/*": {"origins": "*"}})
-    CORS(app, resources={r"/Mail/*": {"origins": "*"}})
+    CORS(app)
+    #CORS(app, resources={r"/Authentication/*": {"origins": "*"}})
+    #CORS(app, resources={r"/Mail/*": {"origins": "*"}})
     
     api.init_app(app)
     db.init_app(app) 

@@ -7,7 +7,7 @@ from flask_restx import Resource, Namespace
 
 from ..extensions import db
 from ..models.models import mail
-from ..spamDetectionProcess.process import demo
+from ..spamDetectionProcess.process import mail_check
 from ..models.api_models import mail_model, mail_input_model, mail_delete_model, mail_update_model
 
 mailNs = Namespace("Mail")
@@ -69,10 +69,10 @@ class mailAPI(Resource):
         return "success, all spams are deleted",200
 
 def checkMail(content):
-    if(demo(content) == 0):
+    if(mail_check(content) == 0):
         result = "mail"
         
-    if(demo(content) == 1):
+    if(mail_check(content) == 1):
         result = "spam"
     
     return result
