@@ -41,7 +41,7 @@
     - Creation du base de donnée (création des tables, relation...)
     - Recuperation des données pour les tests
   - Coté front :
-    - Style d'interfaces
+    - Style des interfaces
 
 > MALLEK Kenza
 
