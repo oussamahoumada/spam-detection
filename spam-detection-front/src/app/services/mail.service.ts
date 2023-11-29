@@ -38,10 +38,10 @@ export class MailService {
     );
   }
 
-  updateMail(id: any): Observable<any> {
+  updateMail(id: any, type: any): Observable<any> {
     return this.http.put(
       this.url,
-      { idMail: id },
+      { idMail: id, type: type },
       {
         headers: corsHeaders,
       }

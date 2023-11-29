@@ -27,7 +27,9 @@
           <span class="notification-number">{{notif_number}}</span>
           <mat-icon style="color:white">notifications</mat-icon>
         </div>
-        <mat-icon style="color:white;margin-left: 20px;">cloud</mat-icon>
+        <button mat-button (click)="logout()">
+          <mat-icon style="color:white;margin-left: 20px;">logout</mat-icon>
+        </button>
         <img class="profile-img" src="" alt="">
       </div>
     </div>

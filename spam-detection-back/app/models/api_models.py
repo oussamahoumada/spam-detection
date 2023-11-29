@@ -56,4 +56,6 @@ mail_delete_model = api.model("mail_delete_input",{
 
 mail_update_model = api.model("mail_update_input",{
     'idMail' : fields.Integer,
+    'type' : fields.String,
+    
 })

@@ -41,7 +41,7 @@ class mailAPI(Resource):
     def put(self):
 
         getMail = mail.query.filter(mail.idMail == mailNs.payload["idMail"]).first()       
-        getMail.type = "mail"
+        getMail.type = mailNs.payload["type"]
 
         db.session.flush()
         db.session.commit()

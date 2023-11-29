@@ -11,6 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  public hide = true;
+
   public loginForm: FormGroup = new FormGroup({
     passWord: new FormControl(null, [Validators.required]),
     mailAdress: new FormControl(null, [Validators.required, Validators.email]),

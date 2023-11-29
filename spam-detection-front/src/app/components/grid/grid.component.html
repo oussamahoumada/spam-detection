@@ -1,4 +1,13 @@
 <!--<button mat-raised-button color="primary" (click)="newMail()" style="float: right;">New mail</button>-->
+<button
+    mat-raised-button
+    color="warn"
+    style="width:100%"
+    *ngIf="showDeleteButton"
+    (click)="getRowsSelected()"
+  >
+  delete
+</button>
 
 <ag-grid-angular
   [class]="class_grid"
@@ -17,6 +26,8 @@
   [defaultColDef]="defaultColDef"
   [detailCellRenderer]="mailContentComponent"
   [getContextMenuItems]="getContextMenuItems"
+  (gridReady)="onGridReady($event)"
   [gridOptions]="gridOptions"
+  (click)="onRowSelect()"
 >
 </ag-grid-angular>

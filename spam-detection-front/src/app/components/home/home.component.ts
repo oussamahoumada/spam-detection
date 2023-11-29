@@ -1,8 +1,10 @@
+import * as $ from 'jquery';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { MailService } from 'src/app/services/mail.service';
 import { MailComponent } from '../grid/mail/mail.component';
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,25 +12,21 @@ import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  constructor(
-    private dialog: MatDialog,
-    private elementRef: ElementRef,
-    private mailService: MailService
-  ) {}
-
   public notif_number = 0;
 
+  constructor(
+    private dialog: MatDialog,
+    private mailService: MailService,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {}
+
   test() {
     this.mailService.setGridClass.emit(true);
   }
-  ngAfterViewInit() {
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.src = 'assets/glass_script.js';
-    this.elementRef.nativeElement.appendChild(s);
+  doSerach(ev: any) {
+    this.mailService.search.emit(ev.value);
   }
-
   filterMailList(mailType: any) {
     this.mailService.mailShowFilter.emit(mailType);
   }
@@ -50,7 +48,86 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  doSerach(ev: any) {
-    this.mailService.search.emit(ev.value);
+  logout() {
+    this.authService.logout();
+  }
+
+  ngAfterViewInit() {
+    const toggleButton = document.querySelector('.dark-light');
+
+    toggleButton?.addEventListener('click', () => {
+      document.getElementById('body')?.classList.toggle('light-mode');
+    });
+
+    $(function () {
+      $('.menu-link').click(function () {
+        $('.menu-link').removeClass('is-active');
+        $(this).addClass('is-active');
+      });
+    });
+
+    $(function () {
+      $('.main-header-link').click(function () {
+        $('.main-header-link').removeClass('is-active');
+        $(this).addClass('is-active');
+      });
+    });
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach((dropdown) => {
+      dropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdowns.forEach((c) => c.classList.remove('is-active'));
+        dropdown.classList.add('is-active');
+      });
+    });
+
+    $('.search-bar input')
+      .focus(function () {
+        $('.header').addClass('wide');
+      })
+      .blur(function () {
+        $('.header').removeClass('wide');
+      });
+
+    $(document).click(function (e) {
+      var container = $('.status-button');
+      var dd = $('.dropdown');
+      if (
+        !container.is(<any>e.target) &&
+        container.has(<any>e.target).length === 0
+      ) {
+        dd.removeClass('is-active');
+      }
+    });
+
+    $(function () {
+      $('.dropdown').on('click', function (e) {
+        $('.content-wrapper').addClass('overlay');
+        e.stopPropagation();
+      });
+      $(document).on('click', function (e) {
+        if ($(e.target).is('.dropdown') === false) {
+          $('.content-wrapper').removeClass('overlay');
+        }
+      });
+    });
+
+    $(function () {
+      $('.status-button:not(.open)').on('click', function (e) {
+        $('.overlay-app').addClass('is-active');
+      });
+      $('.pop-up .close').click(function () {
+        $('.overlay-app').removeClass('is-active');
+      });
+    });
+
+    $('.status-button:not(.open)').click(function () {
+      $('.pop-up').addClass('visible');
+    });
+
+    $('.pop-up .close').click(function () {
+      $('.pop-up').removeClass('visible');
+    });
   }
 }

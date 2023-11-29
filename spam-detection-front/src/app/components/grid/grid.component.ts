@@ -14,6 +14,7 @@ import { MailContentComponent } from './mail-content/mail-content.component';
 export class GridComponent implements OnInit {
   public data: any;
   public rowData: any;
+  private gridApi: any;
   public class_grid = 'ag-theme-alpine';
   public mailContentComponent: any = MailContentComponent;
 
@@ -94,6 +95,22 @@ export class GridComponent implements OnInit {
         this.data = res;
       });
   }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+  }
+
+  getRowsSelected() {
+    if (this.gridApi.getSelectedRows().length < 1) return;
+    let ids: any = [];
+    this.gridApi.getSelectedRows().forEach((mail: any) => {
+      ids.push(mail.idMail);
+    });
+    this.removeMail(ids);
+  }
+  public showDeleteButton = false;
+  onRowSelect() {
+    this.showDeleteButton = this.gridApi.getSelectedRows().length > 0;
+  }
   columnDefs: ColDef[] = [
     {
       width: 110,
@@ -158,6 +175,7 @@ export class GridComponent implements OnInit {
 
   getContextMenuItems(params: any): any {
     var context = [
+      /*
       {
         name: 'remove this mail...',
         action: () => {
@@ -165,6 +183,7 @@ export class GridComponent implements OnInit {
             params.context.thisComponent.removeMail([params.node.data.idMail]);
         },
       },
+      */
       {
         name: 'remove all SPAMs...',
         action: () => {
@@ -177,7 +196,15 @@ export class GridComponent implements OnInit {
         disabled: params.node.data.type != 'spam',
         action: () => {
           if (params.node.data != null && params.node.data != undefined)
-            params.context.thisComponent.checkMail(params.node.data);
+            params.context.thisComponent.checkMail(params.node.data,"mail");
+        },
+      },
+      {
+        name: 'this is a SAPM?',
+        disabled: params.node.data.type != 'mail',
+        action: () => {
+          if (params.node.data != null && params.node.data != undefined)
+            params.context.thisComponent.checkMail(params.node.data, "spam");
         },
       },
       'separator',
@@ -203,8 +230,8 @@ export class GridComponent implements OnInit {
     return params;
   }
 
-  checkMail(mail: any) {
-    this.mailService.updateMail(mail.idMail).subscribe(
+  checkMail(mail: any,type: any) {
+    this.mailService.updateMail(mail.idMail,type).subscribe(
       (res) => {
         this.loadData();
         Swal.fire('Success', res, 'success');

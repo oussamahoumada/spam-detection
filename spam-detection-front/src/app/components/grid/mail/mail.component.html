@@ -1,7 +1,7 @@
 <div [formGroup]="form" class="newMailDialog">
   <h1>New mail</h1>
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Enter an email</mat-label>
       <input
         matInput
@@ -9,13 +9,15 @@
         formControlName="reciever"
         required
       />
+      <mat-icon matSuffix>email</mat-icon>
       <mat-error *ngIf="form.controls['reciever'].invalid">{{
         "Invalid mail"
       }}</mat-error> </mat-form-field
     ><br />
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Sujet</mat-label>
       <input matInput formControlName="sujet" required />
+      <mat-icon matSuffix>text_fields</mat-icon>
     </mat-form-field>
     <mat-menu #menu="matMenu">
       <app-text-style></app-text-style>
