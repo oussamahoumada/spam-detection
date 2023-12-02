@@ -1,10 +1,10 @@
 import * as $ from 'jquery';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
 import { MailService } from 'src/app/services/mail.service';
 import { MailComponent } from '../grid/mail/mail.component';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',

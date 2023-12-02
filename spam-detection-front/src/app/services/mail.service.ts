@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { corsHeaders } from 'src/app/helpers/corsValidation';
@@ -11,8 +11,8 @@ export class MailService {
   private readonly url = 'http://localhost:5000/Mail/';
   public search: EventEmitter<any> = new EventEmitter();
   public loadData: EventEmitter<boolean> = new EventEmitter();
-  public mailShowFilter: EventEmitter<any> = new EventEmitter();
   public setGridClass: EventEmitter<any> = new EventEmitter();
+  public mailShowFilter: EventEmitter<any> = new EventEmitter();
 
   getMails(mail: string): Observable<any> {
     return this.http.get(this.url + mail);

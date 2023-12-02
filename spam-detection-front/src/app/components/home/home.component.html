@@ -17,7 +17,7 @@
       <div class="menu-circle menu-link"></div>
       <div class="header-menu">
         <a class="menu-link is-active" (click)="newMail()">New Mail</a>
-        <a class="menu-link notify" href="javascript:void(0);">Notifications</a>
+        <a class="menu-link notify" href="javascript:void(0);" (click)="filterMailList('All')">All mails</a>
       </div>
       <div class="search-bar">
         <input type="text" placeholder="Search" #sr (input)="doSerach(sr)">

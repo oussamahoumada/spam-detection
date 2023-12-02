@@ -62,7 +62,9 @@ export class GridComponent implements OnInit {
           this.rowData = this.data.filter((fl: any) => fl.type == 'spam');
           break;
         case 'notification':
-          this.rowData = this.data.filter((fl: any) => fl.type == 'mail');
+          this.rowData = this.data.filter(
+            (fl: any) => fl.reciever == this.cookieService.get('mail')
+          );
           break;
         case 'sended':
           this.rowData = this.data.filter(
@@ -75,7 +77,7 @@ export class GridComponent implements OnInit {
           );
           break;
         default:
-          this.rowData = this.data.filter((fl: any) => fl.type == 'spam');
+          this.rowData = this.data;
           break;
       }
     });
@@ -196,7 +198,7 @@ export class GridComponent implements OnInit {
         disabled: params.node.data.type != 'spam',
         action: () => {
           if (params.node.data != null && params.node.data != undefined)
-            params.context.thisComponent.checkMail(params.node.data,"mail");
+            params.context.thisComponent.checkMail(params.node.data, 'mail');
         },
       },
       {
@@ -204,7 +206,7 @@ export class GridComponent implements OnInit {
         disabled: params.node.data.type != 'mail',
         action: () => {
           if (params.node.data != null && params.node.data != undefined)
-            params.context.thisComponent.checkMail(params.node.data, "spam");
+            params.context.thisComponent.checkMail(params.node.data, 'spam');
         },
       },
       'separator',
@@ -230,8 +232,8 @@ export class GridComponent implements OnInit {
     return params;
   }
 
-  checkMail(mail: any,type: any) {
-    this.mailService.updateMail(mail.idMail,type).subscribe(
+  checkMail(mail: any, type: any) {
+    this.mailService.updateMail(mail.idMail, type).subscribe(
       (res) => {
         this.loadData();
         Swal.fire('Success', res, 'success');

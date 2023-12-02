@@ -1,0 +1,13 @@
+Flask
+numpy
+pandas
+Werkzeug
+requests
+flask-cors
+flask-restx
+mysqlclient
+scikit-learn
+pycryptodome
+python-dotenv
+Flask-SocketIO
+Flask-SQLAlchemy

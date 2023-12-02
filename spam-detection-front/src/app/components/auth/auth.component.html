@@ -17,10 +17,11 @@
       <form [formGroup]="loginForm">
         <label for="chk" aria-hidden="true">Login</label>
         <input type="email" name="mailAdress" placeholder="Email" formControlName="mailAdress">
-        <input #pass [type]="hide ? 'password' : 'text'" name="passWord" placeholder="Password" formControlName="passWord">
+        <input type="password" placeholder="Password" formControlName="passWord">
+        <!--<input #pass [type]="hide ? 'password' : 'text'" name="passWord" placeholder="Password" formControlName="passWord">
         <button class="hide" *ngIf="pass.value.length>0" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
+        </button>-->
         <button (click)="doAuthentication()">Login</button>
       </form>
     </div>
