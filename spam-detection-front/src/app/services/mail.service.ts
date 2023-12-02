@@ -1,5 +1,6 @@
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { EventEmitter, Injectable } from '@angular/core';
 import { corsHeaders } from 'src/app/helpers/corsValidation';
 
@@ -7,7 +8,7 @@ import { corsHeaders } from 'src/app/helpers/corsValidation';
   providedIn: 'root',
 })
 export class MailService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
   private readonly url = 'http://localhost:5000/Mail/';
   public search: EventEmitter<any> = new EventEmitter();
   public loadData: EventEmitter<boolean> = new EventEmitter();
@@ -31,7 +32,7 @@ export class MailService {
     });
     return this.http.post(
       this.url + 'delete',
-      { ids: body },
+      { ids: body, mail: this.cookieService.get('mail') },
       {
         headers: corsHeaders,
       }
@@ -49,8 +50,12 @@ export class MailService {
   }
 
   deleteAllSpams(): Observable<any> {
-    return this.http.get(this.url + 'delete_all_spams', {
-      headers: corsHeaders,
-    });
+    return this.http.post(
+      this.url + 'delete_all_spams',
+      { mail: this.cookieService.get('mail') },
+      {
+        headers: corsHeaders,
+      }
+    );
   }
 }

@@ -15,6 +15,7 @@ export class GridComponent implements OnInit {
   public data: any;
   public rowData: any;
   private gridApi: any;
+  public showDeleteButton = false;
   public class_grid = 'ag-theme-alpine';
   public mailContentComponent: any = MailContentComponent;
 
@@ -109,7 +110,7 @@ export class GridComponent implements OnInit {
     });
     this.removeMail(ids);
   }
-  public showDeleteButton = false;
+
   onRowSelect() {
     this.showDeleteButton = this.gridApi.getSelectedRows().length > 0;
   }
@@ -261,6 +262,7 @@ export class GridComponent implements OnInit {
       (res) => {
         this.loadData();
         Swal.fire('Success', res, 'success');
+        this.showDeleteButton = false;
       },
       (err) => {
         Swal.fire('Error', err, 'error');

@@ -52,10 +52,14 @@ login_input_model = api.model("login_input",{
 
 mail_delete_model = api.model("mail_delete_input",{
     'ids' : fields.Raw(),
+    'mail' : fields.String,
 })
 
 mail_update_model = api.model("mail_update_input",{
     'idMail' : fields.Integer,
     'type' : fields.String,
-    
+})
+
+all_spams_delete_model = api.model("all_spams_delete_input",{
+    'mail' : fields.String,
 })

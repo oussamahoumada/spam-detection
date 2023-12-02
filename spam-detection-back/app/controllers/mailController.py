@@ -2,13 +2,13 @@
 """
 @author: oussama
 """
-from sqlalchemy import or_, delete
+from sqlalchemy import and_, or_, delete
 from flask_restx import Resource, Namespace
 
 from ..extensions import db
 from ..models.models import mail
 from ..spamDetectionProcess.process import mail_check
-from ..models.api_models import mail_model, mail_input_model, mail_delete_model, mail_update_model
+from ..models.api_models import mail_model, mail_input_model, mail_delete_model, mail_update_model, all_spams_delete_model
 
 mailNs = Namespace("Mail")
 
@@ -55,15 +55,34 @@ class mailAPI(Resource):
         lst=[]
         for i in mailNs.payload["ids"]:
             lst.append(i['id'])
+            getMail = mail.query.filter(mail.idMail == i['id']).first()
+
+            if(getMail.sender == mailNs.payload["mail"]):
+                getMail.sender = None
+
+            if(getMail.reciever == mailNs.payload["mail"]):
+                getMail.reciever = None
+
+            db.session.flush()
+            db.session.commit()
+
+        '''
         mail_del = delete(mail).where(mail.idMail.in_(lst))
         db.session.execute(mail_del)
         db.session.commit()
+        '''
         return "delete success",200
 
 @mailNs.route("/delete_all_spams")
 class mailAPI(Resource):
-    def get(self):
-        mail_del = delete(mail).where(mail.type=="spam")
+    @mailNs.expect(all_spams_delete_model)
+    def post(self):
+        Adress =  mailNs.payload["mail"]
+        mail_del = delete(mail).where(and_(mail.type=="spam", mail.sender==Adress))
+        db.session.execute(mail_del)
+        db.session.commit()
+
+        mail_del = delete(mail).where(and_(mail.type=="spam", mail.reciever==Adress))
         db.session.execute(mail_del)
         db.session.commit()
         return "success, all spams are deleted",200
