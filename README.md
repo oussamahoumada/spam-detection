@@ -46,6 +46,7 @@
 > MALLEK Kenza
 
 - Conception et développement de l'application
+  - Diagramme de Gantt
   - Coté back :
     - Creation du base de donnée (création des tables, relation...)
     - Recuperation des données pour les tests
