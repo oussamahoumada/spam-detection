@@ -1,5 +1,5 @@
-1- Install NodeJs
-2- Install Angular CLI
+- 1 Install NodeJs
+- 2 Install Angular CLI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
