@@ -9,8 +9,8 @@
 # Membre de l'équipe :
 
 - HOUMADA Oussama 22004909
-- KACHER Aghiles  23007805
-- MALLEK Kenza    23002870
+- KACHER Aghiles 23007805
+- MALLEK Kenza 23002870
 
 # Taches :
 
@@ -60,3 +60,7 @@
 # Diagramme de Base de donne :
 
 - [database](https://github.com/oussamahoumada/spam-detection/blob/main/bdd/bdd.svg)
+
+# Presentation :
+
+- [presentation](https://github.com/oussamahoumada/spam-detection/blob/main/Presentation.pdf)
